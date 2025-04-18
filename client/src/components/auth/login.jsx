@@ -1,24 +1,40 @@
 import React, { useState } from 'react'
 
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    remember: false
-  })
+ 
+const [formData,setFormData] = useState({
+  name:"",
+  email:"",
+  password:"",
+  terms:false,
+  remember:false
+})
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Form submitted:', formData)
-  }
+const handleChange = (e) => {
+  const { name, value, type, checked } = e.target
+  setFormData(prev => ({
+    ...prev,
+    [name]: type === 'checkbox' ? checked : value
+  }))
+}
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }))
+const handleSubmit = (e) => {
+  e.preventDefault()
+  console.log('Form submitted:', formData);
+  if(!formData.email  || !formData.password){
+      console.error("All fields are required");
+      return;
+     }
+
+  try {
+      // const res = await axios.post("http://localhost:5000/api/auth/register", formData);
+      //console.log("User Registered:", res.data);
+  } catch (error) {
+      console.error("Error Registering User:", error.response.data);
   }
+}
+
+
 
   return (
     <div>

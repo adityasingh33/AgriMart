@@ -10,13 +10,16 @@ const navigation = [
   { name: 'Contact', href: '/contact', current: false },
 ]
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+ function classNames(...classes) {
+   return classes.filter(Boolean).join(' ')
+ }
+
+ 
+
 
 const Navbar = () => {
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-green-400">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -49,8 +52,8 @@ const Navbar = () => {
                         to={item.href}
                         className={classNames(
                           item.current
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            ? 'bg-green-900 text-white'
+                            : 'bg-green-600 text-gray-300 hover:bg-green-700 hover:text-white',
                           'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={item.current ? 'page' : undefined}
@@ -76,7 +79,7 @@ const Navbar = () => {
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
                   type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none"
+                  className="rounded-full p-1 text-gray-400 hover:text-white focus:outline-none"
                   >
                   <img className='rounded-full w-8 h-8 mr-2' src='/profile.png' alt='dp' />
 
