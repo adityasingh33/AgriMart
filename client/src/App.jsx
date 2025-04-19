@@ -6,6 +6,8 @@ import Navbar from './components/Navbar/navbar'
 import ProtectedRoute from './components/protectedRoutes.jsx'
 import { AuthProvider } from './context/AuthContext.jsx'
 import Home from './pages/home'
+import About from './pages/about.jsx'
+import Contact from './pages/contact.jsx'
 
 const App = () => {
     return (
@@ -15,12 +17,25 @@ const App = () => {
             <div className="min-h-screen bg-gray-100">
                 <Navbar />
                 <Routes>
-                    <Route path="/" element={<ProtectedRoute>
+                
+                    <Route path="/" element={ 
+                        // <ProtectedRoute>
                          <Home/>
-                       </ProtectedRoute>} />
+                        //  </ProtectedRoute>
+                         } />
+
+                    <Route path="/about" element={ <ProtectedRoute>
+                         <About/>
+                         </ProtectedRoute>} />
+
+                    <Route path="/contact" element={ <ProtectedRoute>
+                         <Contact/>
+                    </ProtectedRoute>} />
+
+
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
-
+                   
                 </Routes>
             </div>
          </Router>
