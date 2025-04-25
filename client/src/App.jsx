@@ -8,6 +8,8 @@ import { AuthProvider } from './context/AuthContext.jsx'
 import Home from './pages/home'
 import About from './pages/about.jsx'
 import Contact from './pages/contact.jsx'
+import Product from './pages/product.jsx'
+import Checkout from './pages/checkout.jsx'
 
 const App = () => {
     return (
@@ -31,6 +33,9 @@ const App = () => {
                     <Route path="/contact" element={ <ProtectedRoute>
                          <Contact/>
                     </ProtectedRoute>} />
+
+                    <Route path="/product/:productId" element={<Product />} />
+                    <Route path="/checkout/:productId" element={<Checkout />} />
 
 
                     <Route path="/login" element={<Login />} />
