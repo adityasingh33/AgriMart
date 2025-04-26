@@ -9,193 +9,37 @@ const Products = [
   {
     id: 1,
     name: "Carrot",
-    category: "ABS LUGGAGE",
+    category: "Vegetable",
     price: 199.00,
+    negotiable: true,
+    minPrice: 149.00, // Minimum price seller will accept
     discount: "30% off",
     rating: 4.8,
     description: "Fresh tomatoes from local farms",
-    
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
       "/images/Tomato.png"
     ],
-    thumbnails: [
-
-    ]
+    thumbnails: []
   },
+  // Other products...
   {
     id: 2,
     name: "Cabbage",
     category: "Vegetable",
     price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
     discount: "30% off",
     rating: 4.8,
     description: "Fresh Cabbage from local farms",
-    
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
       "/images/Cabbage.png"
     ],
-    thumbnails: [
-
-    ]
+    thumbnails: []
   },
-  {
-    id: 3,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 4,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 5,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 6,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 7,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 8,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 9,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 10,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  },
-  {
-    id: 11,
-    name: "Cabbage",
-    category: "Vegetable",
-    price: 199.00,
-    discount: "30% off",
-    rating: 4.8,
-    description: "Fresh Cabbage from local farms",
-    
-    sizes: [ "1 kg", "5 kg", "5 kg"],
-    images: [
-      "/images/Cabbage.png"
-    ],
-    thumbnails: [
-
-    ]
-  }
-
-  
-  // Add similar product objects for IDs 3-11
+  // Rest of products...
 ];
 
 export default function Product() {
@@ -203,11 +47,22 @@ export default function Product() {
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
   const { productId } = useParams();
-
+  
+  // Negotiation states
+  const [isNegotiating, setIsNegotiating] = useState(false);
+  const [offerPrice, setOfferPrice] = useState("");
+  const [negotiationStatus, setNegotiationStatus] = useState(null);
+  const [counterOffer, setCounterOffer] = useState(null);
+  
   useEffect(() => {
     // Find product by ID
     const foundProduct = Products.find(p => p.id === parseInt(productId)) || Products[0];
     setProduct(foundProduct);
+    
+    // Set initial offer price as 80% of the listed price
+    if (foundProduct) {
+      setOfferPrice((foundProduct.price * 0.8).toFixed(2));
+    }
   }, [productId]);
 
   if (!product) {
@@ -222,6 +77,56 @@ export default function Product() {
 
   const increaseQuantity = () => {
     setQuantity(quantity + 1);
+  };
+  
+  const startNegotiation = () => {
+    setIsNegotiating(true);
+    setNegotiationStatus(null);
+    setCounterOffer(null);
+  };
+  
+  const cancelNegotiation = () => {
+    setIsNegotiating(false);
+    setNegotiationStatus(null);
+    setCounterOffer(null);
+    setOfferPrice((product.price * 0.8).toFixed(2));
+  };
+  
+  const handleOfferChange = (e) => {
+    // Only allow numbers and decimals
+    const value = e.target.value.replace(/[^\d.]/g, '');
+    setOfferPrice(value);
+  };
+  
+  const submitOffer = () => {
+    const offerValue = parseFloat(offerPrice);
+    
+    // Validate offer
+    if (isNaN(offerValue) || offerValue <= 0) {
+      setNegotiationStatus("invalid");
+      return;
+    }
+    
+    // Simulate seller response
+    if (offerValue >= product.minPrice) {
+      // Offer accepted
+      setNegotiationStatus("accepted");
+      setCounterOffer(null);
+    } else if (offerValue < product.minPrice * 0.7) {
+      // Offer too low - rejected
+      setNegotiationStatus("rejected");
+      setCounterOffer(null);
+    } else {
+      // Counter offer
+      const counterValue = ((product.minPrice + offerValue) / 2).toFixed(2);
+      setNegotiationStatus("counter");
+      setCounterOffer(counterValue);
+    }
+  };
+  
+  const acceptCounterOffer = () => {
+    setNegotiationStatus("accepted");
+    setOfferPrice(counterOffer);
   };
 
   return (
@@ -342,14 +247,21 @@ export default function Product() {
                   </button>
                 </div>
 
-                <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
+                <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-6 gap-y-3">
                   <div className="flex items-center">
                     <h5 className="font-manrope font-semibold text-2xl leading-9 text-gray-900">
-                      $ {product.price.toFixed(2)}
+                      $ {negotiationStatus === "accepted" ? offerPrice : product.price.toFixed(2)}
                     </h5>
-                    <span className="ml-3 font-semibold text-lg text-indigo-600">
-                      {product.discount}
-                    </span>
+                    {negotiationStatus !== "accepted" && (
+                      <span className="ml-3 font-semibold text-lg text-indigo-600">
+                        {product.discount}
+                      </span>
+                    )}
+                    {negotiationStatus === "accepted" && (
+                      <span className="ml-3 font-semibold text-lg text-green-600">
+                        Negotiated
+                      </span>
+                    )}
                   </div>
                   <svg
                     className="mx-5 max-[400px]:hidden"
@@ -384,6 +296,93 @@ export default function Product() {
                     <span className="text-base font-medium text-white">{product.rating}</span>
                   </button>
                 </div>
+                
+                {/* Price Negotiation System */}
+                {product.negotiable && !isNegotiating && negotiationStatus !== "accepted" && (
+                  <div className="mb-6">
+                    <button 
+                      onClick={startNegotiation} 
+                      className="text-center w-full px-5 py-3 rounded-lg bg-green-600 flex items-center justify-center font-semibold text-base text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-green-700 hover:shadow-green-300"
+                    >
+                      <svg className="mr-2" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 16L4 17C4 18.6569 5.34315 20 7 20L17 20C18.6569 20 20 18.6569 20 17L20 16M16 12L20 16L16 20M20 12L16 8M20 8L16 4M8 12L4 16L8 20M4 12L8 8M4 8L8 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Negotiate Price
+                    </button>
+                  </div>
+                )}
+                
+                {/* Negotiation UI */}
+                {isNegotiating && (
+                  <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                    <h3 className="font-semibold text-lg text-gray-900 mb-3">Make an Offer</h3>
+                    <div className="flex items-center mb-4">
+                      <span className="text-gray-600 mr-2">$</span>
+                      <input
+                        type="text"
+                        value={offerPrice}
+                        onChange={handleOfferChange}
+                        className="flex-1 py-2 px-3 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        placeholder="Enter your offer"
+                      />
+                    </div>
+                    
+                    {negotiationStatus === "invalid" && (
+                      <p className="text-red-600 mb-3">Please enter a valid price.</p>
+                    )}
+                    
+                    {negotiationStatus === "rejected" && (
+                      <p className="text-red-600 mb-3">Your offer was too low. Please try again.</p>
+                    )}
+                    
+                    {negotiationStatus === "counter" && (
+                      <div className="mb-3">
+                        <p className="text-gray-700">Seller counter-offers: <span className="font-semibold">${counterOffer}</span></p>
+                        <div className="flex space-x-2 mt-2">
+                          <button 
+                            onClick={acceptCounterOffer}
+                            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                          >
+                            Accept
+                          </button>
+                          <button 
+                            onClick={cancelNegotiation}
+                            className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                          >
+                            Decline
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="flex space-x-2">
+                      <button 
+                        onClick={submitOffer}
+                        className="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
+                      >
+                        Submit Offer
+                      </button>
+                      <button 
+                        onClick={cancelNegotiation}
+                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Success message */}
+                {negotiationStatus === "accepted" && !isNegotiating && (
+                  <div className="mb-6 p-4 bg-green-50 rounded-lg border border-green-200">
+                    <p className="text-green-700 font-medium flex items-center">
+                      <svg className="mr-2" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="rgb(21, 128, 61)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      Price negotiation successful! Your price: ${offerPrice}
+                    </p>
+                  </div>
+                )}
 
                 <p className="font-medium text-lg text-gray-900 mb-2">Size (KG)</p>
                 <div className="grid grid-cols-2 min-[400px]:grid-cols-4 gap-3 mb-3 min-[400px]:mb-8">
@@ -464,11 +463,19 @@ export default function Product() {
                     Add to cart
                   </button>
                 </div>
-                <button className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300">
-                <Link to={`/checkout/${product.id}`} className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300">
-                    Buy Now
-                </Link>
-                </button>
+                {/* <Link 
+                  to={`/checkout/${product.id}`} 
+                  className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300"
+                >
+                  Buy Now
+                </Link> */}
+
+              <Link 
+                    to={`/checkout/${product.id}${negotiationStatus === "accepted" ? `?negotiatedPrice=${offerPrice}` : ''}`} 
+                    className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300"
+              >
+                     Buy Now
+              </Link>
               </div>
             </div>
           </div>
@@ -477,4 +484,3 @@ export default function Product() {
     </>
   );
 }
-

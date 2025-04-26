@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 
 // Mock product database - same as used in Product.jsx
 const Products = [
@@ -12,17 +12,13 @@ const Products = [
     rating: 4.8,
     description: "Premium ABS luggage for your summer travels",
     colors: [
-
       { name: "Beige", image: "https://pagedone.io/asset/uploads/1700472529.png" }
     ],
     sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
     images: [
-
       <img src="/images/Tomato.png" alt="Tomato" />
-
     ],
     thumbnails: [
-
     ]
   },
   {
@@ -34,15 +30,12 @@ const Products = [
     rating: 4.7,
     description: "Durable luggage for cold weather trips",
     colors: [
-      
-       { name: "Beige", image: "https://pagedone.io/asset/uploads/1700472529.png" }
+      { name: "Beige", image: "https://pagedone.io/asset/uploads/1700472529.png" }
     ],
     sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
     images: [
-
     ],
     thumbnails: [
-
     ]
   }
 ];
@@ -70,6 +63,10 @@ export default function Checkout() {
     }
   });
   const { productId } = useParams();
+  const location = useLocation();
+  // Get negotiated price from URL query parameters
+  const queryParams = new URLSearchParams(location.search);
+  const negotiatedPrice = queryParams.get('negotiatedPrice');
 
   // Shipping methods
   const shippingMethods = [
@@ -83,8 +80,15 @@ export default function Checkout() {
   useEffect(() => {
     // Find product by ID
     const foundProduct = Products.find(p => p.id === parseInt(productId)) || Products[0];
+    
+    // Apply negotiated price if available
+    if (negotiatedPrice) {
+      foundProduct.price = parseFloat(negotiatedPrice);
+      foundProduct.isNegotiated = true;
+    }
+    
     setProduct(foundProduct);
-  }, [productId]);
+  }, [productId, negotiatedPrice]);
 
   if (!product) {
     return <div className="flex justify-center items-center h-screen">Loading...</div>;
@@ -92,9 +96,10 @@ export default function Checkout() {
 
   // Calculate prices
   const subtotal = product.price * quantity;
-  const discount = subtotal * 0.3; // Assuming 30% discount
+  // Apply discount only if price is not negotiated
+  const discount = product.isNegotiated ? 0 : subtotal * 0.1 ; // Assuming 30% discount
   const shipping = selectedShippingMethod.price;
-  const total = subtotal - discount + shipping;
+  const total = subtotal  - discount + shipping;
 
   const handleInputChange = (section, field, value) => {
     setFormData({
@@ -449,7 +454,12 @@ export default function Checkout() {
                     <h3 className="font-medium text-gray-800">{product.name}</h3>
                     <p className="text-gray-500 text-sm">Quantity: {quantity}</p>
                     <p className="text-gray-500 text-sm">Size: {product.sizes[0]}</p>
-                    <p className="text-gray-500 text-sm">Color: {product.colors[0].name}</p>
+                    {product.colors && product.colors[0] && (
+                      <p className="text-gray-500 text-sm">Color: {product.colors[0].name}</p>
+                    )}
+                    {product.isNegotiated && (
+                      <p className="text-green-600 text-sm font-medium">Negotiated Price</p>
+                    )}
                   </div>
                 </div>
                 
@@ -458,10 +468,12 @@ export default function Checkout() {
                     <span>Subtotal</span>
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Discount</span>
-                    <span className="text-green-600">-${discount.toFixed(2)}</span>
-                  </div>
+                  {!product.isNegotiated && (
+                    <div className="flex justify-between text-gray-600">
+                      <span>Discount</span>
+                      <span className="text-green-600">-${discount.toFixed(2)}</span>
+                    </div>
+                  )}
                   <div className="flex justify-between text-gray-600">
                     <span>Shipping</span>
                     <span>${shipping.toFixed(2)}</span>
