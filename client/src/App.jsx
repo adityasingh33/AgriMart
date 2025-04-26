@@ -10,6 +10,7 @@ import About from './pages/about.jsx'
 import Contact from './pages/contact.jsx'
 import Product from './pages/product.jsx'
 import Checkout from './pages/checkout.jsx'
+import Cart from './pages/cart.jsx'
 
 const App = () => {
     return (
@@ -36,6 +37,9 @@ const App = () => {
 
                     <Route path="/product/:productId" element={<Product />} />
                     <Route path="/checkout/:productId" element={<Checkout />} />
+                    <Route path="/cart" element={<ProtectedRoute>
+                         <Cart/>
+                    </ProtectedRoute>} />
 
 
                     <Route path="/login" element={<Login />} />
