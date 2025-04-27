@@ -11,6 +11,7 @@ import Contact from './pages/contact.jsx'
 import Product from './pages/product.jsx'
 import Checkout from './pages/checkout.jsx'
 import Cart from './pages/cart.jsx'
+import Profile from './pages/profile.jsx'
 
 const App = () => {
     return (
@@ -41,6 +42,8 @@ const App = () => {
                          <Cart/>
                     </ProtectedRoute>} />
 
+
+                    <Route path="/profile" element={<Profile/>} />
 
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />

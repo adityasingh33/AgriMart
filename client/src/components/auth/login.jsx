@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
  
+
+const navigate = useNavigate();
+
 const [formData,setFormData] = useState({
   name:"",
   email:"",
@@ -33,6 +37,10 @@ const handleSubmit = (e) => {
       console.error("Error Registering User:", error.response.data);
   }
 }
+
+const handleSignUp = () => {
+  navigate('/register');
+};
 
 
 
@@ -108,9 +116,17 @@ const handleSubmit = (e) => {
                 </button>
                 <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                   Don't have an account yet?{' '}
-                  <a href="#" className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                    Sign up
-                  </a>
+                  
+
+
+          <button 
+            onClick={handleSignUp}
+            type='button'
+            className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+          >
+                Sign up
+          </button>
+
                 </p>
               </form>
             </div>
