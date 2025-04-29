@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
  const Register = () => {
   const [formData, setFormData] = useState({
@@ -17,7 +19,7 @@ import React, { useState } from 'react'
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
     console.log('Form submitted:', formData);
     if(!formData.name || !formData.email  || !formData.password){
@@ -26,10 +28,27 @@ import React, { useState } from 'react'
        }
 
     try {
-        // const res = await axios.post("http://localhost:5000/api/auth/register", formData);
-        //console.log("User Registered:", res.data);
+
+      const userData = {
+        name: formData.name,
+        email: formData.email,
+        password: formData.password
+    };
+
+    console.log('Sending data to server:', userData);
+
+
+        const res = await axios.post("http://localhost:5000/api/auth/register", formData);
+        console.log("User Registered:", res.data);
+        localStorage.setItem('token', res.data.token);
+        // Navigate to login page after successful registration
+        navigate('/login');
     } catch (error) {
+      if (error.response) {
         console.error("Error Registering User:", error.response.data);
+      } else {
+        console.error("Error Registering User:", error.message);
+      }
     }
 
   };

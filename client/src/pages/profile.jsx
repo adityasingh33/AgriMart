@@ -37,11 +37,11 @@ function Profile() {
       }
     }, [user]);
 
-    useEffect(() => {
-      if (!isAuthenticated) {
-          navigate('/login');
-      }
-  }, [isAuthenticated, navigate]);
+  //   useEffect(() => {
+  //     if (!isAuthenticated) {
+  //         navigate('/login');
+  //     }
+  // }, [isAuthenticated, navigate]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

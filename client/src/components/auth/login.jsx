@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const Login = () => {
  
@@ -22,19 +23,27 @@ const handleChange = (e) => {
   }))
 }
 
-const handleSubmit = (e) => {
-  e.preventDefault()
+const handleSubmit = async(e) => {
+  e.preventDefault();
   console.log('Form submitted:', formData);
-  if(!formData.email  || !formData.password){
+  
+  if(!formData.email || !formData.password){
       console.error("All fields are required");
       return;
-     }
+  }
 
   try {
-      // const res = await axios.post("http://localhost:5000/api/auth/register", formData);
-      //console.log("User Registered:", res.data);
+      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
+      console.log("User Logged In:", res.data);
+      
+      // Store the token
+      localStorage.setItem('token', res.data.token);
+      localStorage.setItem('user', JSON.stringify(res.data.user));
+      
+      // Navigate to home page
+      navigate('/');
   } catch (error) {
-      console.error("Error Registering User:", error.response.data);
+      console.error("Error Logging In:", error.response.data);
   }
 }
 

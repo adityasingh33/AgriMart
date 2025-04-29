@@ -8,7 +8,7 @@ import "swiper/css";
 const Products = [
   {
     id: 1,
-    name: "Carrot",
+    name: "Tomato",
     category: "Vegetable",
     price: 199.00,
     negotiable: true,
