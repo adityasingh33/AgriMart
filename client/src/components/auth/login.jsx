@@ -4,49 +4,67 @@ import axios from 'axios'
 
 const Login = () => {
  
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({
+      email: "",
+      password: "",
+      remember: false
+  });
 
-const navigate = useNavigate();
 
-const [formData,setFormData] = useState({
-  name:"",
-  email:"",
-  password:"",
-  terms:false,
-  remember:false
-})
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prevState => ({
+        ...prevState,
+        [name]: type === 'checkbox' ? checked : value
+    }));
+};
 
-const handleChange = (e) => {
-  const { name, value, type, checked } = e.target
-  setFormData(prev => ({
-    ...prev,
-    [name]: type === 'checkbox' ? checked : value
-  }))
-}
+  const handleSubmit = async(e) => {
+      e.preventDefault();
+      setError('');
+      console.log('Attempting login with:', { email: formData.email }); // Debug log
 
-const handleSubmit = async(e) => {
-  e.preventDefault();
-  console.log('Form submitted:', formData);
-  
-  if(!formData.email || !formData.password){
-      console.error("All fields are required");
-      return;
-  }
+      try {
+          const response = await axios.post(
+              "http://localhost:5000/api/auth/login",
+              {
+                  email: formData.email,
+                  password: formData.password
+              },
+              {
+                  headers: {
+                      'Content-Type': 'application/json'
+                  }
+              }
+          );
 
-  try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", formData);
-      console.log("User Logged In:", res.data);
-      
-      // Store the token
-      localStorage.setItem('token', res.data.token);
-      localStorage.setItem('user', JSON.stringify(res.data.user));
-      
-      // Navigate to home page
-      navigate('/');
-  } catch (error) {
-      console.error("Error Logging In:", error.response.data);
-  }
-}
+          console.log('Server response:', response.data); // Debug log
 
+          if (response.data && response.data.token) {
+              localStorage.setItem('token', response.data.token);
+              if (response.data.user) {
+                  localStorage.setItem('user', JSON.stringify(response.data.user));
+              }
+              navigate('/');
+          } else {
+              setError('Invalid response from server');
+          }
+      } catch (error) {
+          console.error("Error details:", {
+              status: error.response?.status,
+              message: error.response?.data?.message,
+              error: error.message
+          });
+          
+          if (error.response?.status === 401) {
+              setError('Invalid email or password');
+          } else {
+              setError(error.response?.data?.message || 'Login failed');
+          }
+      }
+  };
 const handleSignUp = () => {
   navigate('/register');
 };
