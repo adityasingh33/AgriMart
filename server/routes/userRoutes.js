@@ -1,13 +1,24 @@
 
 import express from "express";
-import User from "../models/User.js";
+import User from "../models/user.js";
+import protect from "../middleware/AuthMiddleware.js"
 
 const router = express.Router();
 
 
-router.put("/update-address/:id", async (req, res) => {
+router.put("/update-address/:id",protect, async (req, res) => {
   try {
+
+    if (req.user._id.toString() !== req.params.id) {
+      return res.status(403).json({ 
+        message: "Not authorized to update this address" 
+      });
+    }
+
+
     const { address } = req.body;
+
+
     
     // Validate input
     if (!address) {
