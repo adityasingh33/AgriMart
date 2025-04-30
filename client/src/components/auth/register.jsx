@@ -40,7 +40,7 @@ import axios from 'axios';
     console.log('Sending data to server:', userData);
 
 
-        const res = await axios.post("http://localhost:5000/api/auth/register", formData);
+        const res = await axios.post("https://agrimart-backend.onrender.com/api/auth/register", formData);
         console.log("User Registered:", res.data);
         localStorage.setItem('token', res.data.token);
         // Navigate to login page after successful registration
