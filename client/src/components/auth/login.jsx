@@ -28,7 +28,7 @@ const Login = () => {
 
       try {
           const response = await axios.post(
-              "https://agrimart-backend.onrender.com/api/auth/login",
+              `${import.meta.env.VITE_API_URL}/api/auth/login`,
               {
                   email: formData.email,
                   password: formData.password
