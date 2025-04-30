@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin : "https://your-frontend-name.vercel.app",
+        origin : "https://agri-mart-bay.vercel.app",
         credentials : true
     })
 );
