@@ -6,42 +6,42 @@ const productData = [
     id: 1,
     name: "Tomato",
     description: "Freshly plucked oranges",
-    image: "public/images/Tomato.png" ,
+    image: "/images/Tomato.png" ,
     price: 199.00
   },
   {
     id: 2,
     name: "Cabbage",
-    description: "Durable luggage for cold weather trips",
+    description: "",
     image: " /images/Cabbage.png",
     price: 249.00
   },
   {
     id: 3,
     name: "Carrots",
-    description: "Elegant and spacious travel companion",
-    image:  "public/images/Carrots.png",
+    description: "",
+    image:  "/images/Carrots.png",
     price: 179.00
   },
   {
     id: 4,
     name: "Orange",
-    description: "Professional luggage for business trips",
-    image: "public/images/orange.png",
+    description: "",
+    image: "/images/orange.png",
     price: 229.00
   },
   {
     id: 5,
     name: "Potato",
-    description: "Rugged backpack for outdoor adventures",
-    image:  "public/images/potato.png",
+    description: "",
+    image:  "/images/potato.png",
     price: 159.00
   },
   {
     id: 6,
     name: "Spinach",
-    description: "Lightweight backpack for hiking enthusiasts",
-    image:  "public/images/spinach.jpg",
+    description: "",
+    image:  "/images/spinach.jpg",
     price: 139.00
   }
 ];
@@ -50,36 +50,36 @@ const freshProducts = [
   {
     id: 7,
     name: "Spinach",
-    description: "Lightweight backpack for hiking enthusiasts",
-    image:  "public/images/spinach.jpg",
+    description: "",
+    image:  "/images/spinach.jpg",
     price: 119.00
   },
   {
     id: 8,
     name: "Potato",
-    description: "Rugged backpack for outdoor adventures",
-    image:  "public/images/potato.png",
+    description: "",
+    image:  "/images/potato.png",
     price: 289.00
   },
   {
     id: 9,
     name: "Tomato",
-    description: "Freshly plucked oranges",
-    image: "public/images/Tomato.png" ,
+    description: "",
+    image: "/images/Tomato.png" ,
     price: 99.00
   },
   {
     id: 10,
     name: "Orange",
-    description: "Professional luggage for business trips",
-    image: "public/images/orange.png",
+    description: "",
+    image: "/images/orange.png",
     price: 149.00
   },
   {
     id: 11,
     name: "Carrots",
-    description: "Elegant and spacious travel companion",
-    image:  "public/images/Carrots.png",
+    description: "",
+    image:  "/images/Carrots.png",
     price: 189.00
   }
 ];
