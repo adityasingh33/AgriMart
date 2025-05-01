@@ -75,7 +75,7 @@ function Profile() {
     
             // Make API request with token in headers
             const res = await axios.put(
-                "http://localhost:5000/api/profile", 
+                `${import.meta.env.VITE_API_URL}/api/auth/profile`, 
                 cleanedFormData,
                 {
                     headers: {

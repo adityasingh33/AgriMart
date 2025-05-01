@@ -13,7 +13,7 @@ const productData = [
     id: 2,
     name: "Cabbage",
     description: "Durable luggage for cold weather trips",
-    image: " public/images/Cabbage.png",
+    image: " /images/Cabbage.png",
     price: 249.00
   },
   {
