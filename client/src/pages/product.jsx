@@ -52,7 +52,7 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/Cabbage.png"
+      "/images/Carrots.png"
     ],
     thumbnails: []
   },
@@ -69,7 +69,7 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/Cabbage.png"
+      "/images/orange.png"
     ],
     thumbnails: []
   },
@@ -87,7 +87,7 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/Cabbage.png"
+      "/images/potato.png"
     ],
     thumbnails: []
   },
@@ -104,10 +104,98 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/Cabbage.png"
+      "/images/spinach.png"
     ],
     thumbnails: []
   },
+
+   {
+    id: 7,
+    name: "Spinach",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/spinach.png"
+    ],
+    thumbnails: []
+  },
+
+   {
+    id: 8,
+    name: "Potato",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/potato.png"
+    ],
+    thumbnails: []
+  },
+
+
+   {
+    id: 9,
+    name: "Tomato",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Tomato.png"
+    ],
+    thumbnails: []
+  },
+
+   {
+    id: 10,
+    name: "Orange",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/orange.png"
+    ],
+    thumbnails: []
+  },
+
+   {
+    id: 11,
+    name: "Carrots",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Carrots.png"
+    ],
+    thumbnails: []
+  },
+
+
   // Rest of products...
 ];
 
