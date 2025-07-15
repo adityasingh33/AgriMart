@@ -42,7 +42,59 @@ const Products = [
 
   {
     id: 3,
-    name: "Cabbage",
+    name: "Carrots",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Cabbage.png"
+    ],
+    thumbnails: []
+  },
+
+    {
+    id: 4,
+    name: "Orange",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Cabbage.png"
+    ],
+    thumbnails: []
+  },
+
+
+    {
+    id: 5,
+    name: "Potato",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Cabbage.png"
+    ],
+    thumbnails: []
+  },
+
+    {
+    id: 6,
+    name: "Spinach",
     category: "Vegetable",
     price: 199.00,
     negotiable: true,
