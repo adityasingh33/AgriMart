@@ -104,7 +104,7 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/spinach.png"
+      "/images/spinach.jpg"
     ],
     thumbnails: []
   },
@@ -121,7 +121,7 @@ const Products = [
     description: "Fresh Cabbage from local farms",
     sizes: [ "1 kg", "5 kg", "5 kg"],
     images: [
-      "/images/spinach.png"
+      "/images/spinach.jpg"
     ],
     thumbnails: []
   },
