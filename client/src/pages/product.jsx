@@ -39,6 +39,23 @@ const Products = [
     ],
     thumbnails: []
   },
+
+  {
+    id: 3,
+    name: "Cabbage",
+    category: "Vegetable",
+    price: 199.00,
+    negotiable: true,
+    minPrice: 159.00,
+    discount: "30% off",
+    rating: 4.8,
+    description: "Fresh Cabbage from local farms",
+    sizes: [ "1 kg", "5 kg", "5 kg"],
+    images: [
+      "/images/Cabbage.png"
+    ],
+    thumbnails: []
+  },
   // Rest of products...
 ];
 
