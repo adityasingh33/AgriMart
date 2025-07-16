@@ -27,7 +27,7 @@ const Products = [
     id: 2,
     name: "Cabbage",
     category: "Vegetable",
-    price: 199.00,
+    price: 249.00,
     negotiable: true,
     minPrice: 159.00,
     discount: "30% off",

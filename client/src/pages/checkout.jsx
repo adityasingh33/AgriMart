@@ -10,10 +10,8 @@ const Products = [
     price: 199.00,
     discount: "30% off",
     rating: 4.8,
-    description: "Premium ABS luggage for your summer travels",
-    colors: [
-      { name: "Beige", image: "https://pagedone.io/asset/uploads/1700472529.png" }
-    ],
+    description: "",
+  
     sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
     images: [
       <img src="/images/Tomato.png" alt="Tomato" />
@@ -28,10 +26,157 @@ const Products = [
     price: 249.00,
     discount: "20% off",
     rating: 4.7,
-    description: "Durable luggage for cold weather trips",
-    colors: [
-      { name: "Beige", image: "https://pagedone.io/asset/uploads/1700472529.png" }
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
     ],
+    thumbnails: [
+    ]
+  },
+
+  {
+    id: 3,
+    name: "Carrot",
+    category: "ABS LUGGAGE",
+    price: 1000,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+  {
+    id: 4,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+
+  {
+    id: 5,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+
+  {
+    id: 6,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+  {
+    id: 7,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+
+  {
+    id: 8,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+
+  {
+    id: 9,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+
+  {
+    id: 10,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
+    sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
+    images: [
+    ],
+    thumbnails: [
+    ]
+  },
+
+  {
+    id: 11,
+    name: "Cabbage",
+    category: "ABS LUGGAGE",
+    price: 249.00,
+    discount: "20% off",
+    rating: 4.7,
+    description: "",
+   
     sizes: ["Full Set", "10 kg", "25 kg", "35 kg"],
     images: [
     ],
@@ -66,6 +211,8 @@ export default function Checkout() {
   const location = useLocation();
   // Get negotiated price from URL query parameters
   const queryParams = new URLSearchParams(location.search);
+
+  
   const negotiatedPrice = queryParams.get('negotiatedPrice');
 
   // Shipping methods
@@ -95,7 +242,7 @@ export default function Checkout() {
   }
 
   // Calculate prices
-  const subtotal = product.price * quantity;
+  const subtotal = product.price * quantity  || price.id;
   // Apply discount only if price is not negotiated
   const discount = product.isNegotiated ? 0 : subtotal * 0.1 ; // Assuming 30% discount
   const shipping = selectedShippingMethod.price;
